@@ -1,9 +1,7 @@
 xquery version "3.0";
 
-(: Load the collection of XML files from the 'cw1files' directory :)
 let $docs := collection("?select=*.xml")
 
-(: Construct the HTML table :)
 return
 <html>
   <body>
