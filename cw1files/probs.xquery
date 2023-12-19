@@ -2,7 +2,6 @@ xquery version "3.0";
 
 let $docs := collection("?select=*.xml")
 
-(: Calculate the total occurrences of each word in the corpus :)
 let $word-frequencies :=
   for $doc in $docs
   for $w in $doc//w
@@ -10,7 +9,6 @@ let $word-frequencies :=
   group by $word
   return <word frequency="{count($w)}">{$word}</word>
 
-(: Gather pairs of 'has' and its successor words :)
 let $pairs :=
   for $doc in $docs
   for $w in $doc//w
@@ -22,7 +20,6 @@ let $pairs :=
       <next>{$next-word}</next>
     </pair>
 
-(: Generate unique pairs with their frequency and calculate the probability :)
 let $unique-pairs :=
   for $pair in $pairs
   let $current := $pair/current
@@ -43,7 +40,6 @@ let $unique-pairs :=
       <probability>{$probability}</probability>
     </unique-pair>
 
-(: Output the result as an HTML table :)
 return
 <html>
   <body>
